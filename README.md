@@ -1,0 +1,6 @@
+# hessian-demo
+This is a working example of a Hessian-based web service in a Spring Boot application without `HessianServiceExporter`.
+
+If you search for something like "Hessian Spring integration" you get a lot of examples that use Spring's [`HessianServiceExporter`](https://docs.spring.io/spring-framework/docs/5.3.31/javadoc-api/org/springframework/remoting/caucho/HessianServiceExporter.html) but it was deprecated in Spring 5.3 and then [removed](https://github.com/spring-projects/spring-framework/issues/27422) in Spring 6, so now you have to use `HessianServlet` directly: extend it so that it implements your service interface and then use Spring's [`ServletRegistrationBean`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/web/servlet/ServletRegistrationBean.html) to enable it.  On the servlet you should also enable the whitelisting of allowed classes to be safer.
+
+The demo provides two POMs: the main one uses Spring Boot 3.2.0, so it needs Java 17+ and [hessian-jakarta](https://github.com/pnavato/hessian-jakarta); the alternative one uses Spring Boot 2.7.18, so it works with Java 8+ and the classic [hessian](https://mvnrepository.com/artifact/com.caucho/hessian) library.
